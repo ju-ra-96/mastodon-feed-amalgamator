@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block extra_head %}<link rel="stylesheet" href="{{ url_for('static', filename='feed.css') }}">{% endblock %}
+{% block header %}
+    <h1 class="add-server-title">
+        {% block title %}Enter the domain name of server{% endblock %}
+    </h1>
+    <script>
+        // Stop the form resubmission on page refresh
+
+        if (window.history.replaceState) {
+
+            window.history.replaceState(null, null, window.location.href);
+
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    {% if error_message %}
+    <div class="flash">{{ error_message }}</div>
+    {% endif %}
+    {% if is_domain_set == true %}
+        <div class="get-auth-token">
+            <p>
+                Please click on this <a href="{{ url }}">link</a> and paste the obtained authorization token below
+            </p>
+            <form method="post">
+                <label for="token">Authorization Token</label>
+                <input type="text" name="token" id="token" required>
+                <input type="submit" value="Confirm">
+            </form>
+        </div>
+    {% else %}
+        <div class="enter-domain">
+            <form method="post">
+                <div>
+                    <label for="domain">Sever Domain/URL</label>
+                    <input type="text" name="domain" id="domain" required>
+                    {% if error == true %}<span>Can't add this server, try again!</span>{% endif %}
+                </div>
+                <input type="submit" class="add-server-btn" value="Add Server">
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

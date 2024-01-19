@@ -1,0 +1,30 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Srinivas Raman", email = "srinivasraman18@gmail.com"},
+    {name = "BugsBunny", email = "bugsbunny@gmail.com"},
+    {name = "Brandon Wu",email = "brandonmwu888@gmail.com"},
+    {name = "Vancheeswaran Vaidyanathan", email = "vigneshvanchy@gmail.com"},
+    {name = "Samarth Bhadane", email = "samarthbhadane119@gmail.com"},
+    {name = "Wei Jie CHIA",email = "wchia@ucsd.edu"},
+    {name = "Samarth Bhadane", email = "samarthbhadane119@gmail.com"},
+    {name = "Julian Rahimi",email = "78955065+ju-ra-96@users.noreply.github.com"},
+]
+dependencies = [
+    "flask>=3.0.0",
+    "Mastodon-py>=1.8.1",
+    "ecs-logging==2.1.0",
+    "Flask-SQLAlchemy==3.1.1",
+    "coverage==7.3.2",
+    "djlint>=1.34.0",
+    "ruff>=0.1.7",
+    "yamllint>=1.33.0",
+    "gunicorn==21.2.0",
+    "pyodbc>=5.0.1",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+

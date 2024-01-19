@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block extra_head %}<link rel="stylesheet" href="{{ url_for('static', filename='feed.css') }}">{% endblock %}
+{% block header %}
+    <h1 class="add-server-title">
+        {% block title %}Delete Server{% endblock %}
+    </h1>
+    <script>
+        // Stop the form resubmission on page refresh
+
+        if (window.history.replaceState) {
+
+            window.history.replaceState(null, null, window.location.href);
+
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    {% if error_message %}
+    <div class="flash">{{ error_message }}</div>
+    {% endif %}
+    <div class="delete-server">
+        <div class="server-list">
+            {% if user_servers is not none %}
+                <table id="servers">
+                    <caption>Servers To Delete</caption>
+                    <tr>
+                        <th></th>
+                        <th>Server</th>
+                    </tr>
+                    <form id="delete-server" method="post">
+                        {% for user_server in user_servers %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="servers" value="{{ user_server.server }}">
+                                </td>
+                                <td>{{ user_server.server }}</td>
+                            </tr>
+                        {% endfor %}
+                    </form>
+                </table>
+                <input type="submit"
+                       form="delete-server"
+                       class="delete-server-button"
+                       value="Delete">
+            {% else %}
+                <h3>No server records found</h3>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

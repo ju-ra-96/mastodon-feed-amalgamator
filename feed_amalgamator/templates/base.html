@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+              content="A brief description of Feed Amalgamator page content">
+        <meta name="keywords" content="feed, amalgamator, news, aggregation">
+        <title>
+            {% block title %}{% endblock %}
+        - Feed Amalgamator</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+              rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+              rel="stylesheet">
+        {% block extra_head %}{% endblock %}
+    </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R5K0TDKF83"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-R5K0TDKF83');
+    </script>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h1 class="logo">Feed Amalgamator</h1>
+            <ul class="nav-links">
+                {% if g.user %}
+                    <li>
+                        <a href="{{ url_for("about.about") }}">About</a>
+                    </li>
+                    <li>
+                        <span class="username">Hello {{ g.user[0].username }}!</span>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">
+                                <i class="fa fa-bars menu-icon"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="{{ url_for("feed.feed_home") }}"><i class="fa fa-fw fa-house"></i> Home</a>
+                                <a href="{{ url_for("feed.add_server") }}"> <i class="fa fa-fw fa-plus"></i> Add Server</a>
+                                <a href="{{ url_for("feed.delete_server") }}"><i class="fa fa-fw fa-close"></i> Delete Server</a>
+                                <a href="{{ url_for("auth.logout") }}"><i class="fa fa-fw fa-sign-out"></i> Log Out</a>
+                            </div>
+                        </div>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ url_for("about.about") }}">About</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("auth.register") }}">Register</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for("auth.login") }}">Log In</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <section class="content">
+        <header>
+            {% block header %}{% endblock %}
+        </header>
+        {% for message in get_flashed_messages() %}<div class="flash">{{ message }}</div>{% endfor %}
+        {% block content %}{% endblock %}
+    </section>
+</html>
